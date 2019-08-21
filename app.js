@@ -7,10 +7,26 @@ for (var i = 0; i < list_items.length; i++) {
 
         var item = list_items[i];
 
-        item.addEventListener('dragstart', function(){
+        item.addEventListener('dragstart', function(e){
 
-            dragged_item = this;
-            console.log(dragged_item);
+            dragged_item = item;
+            
+            setTimeout(function(){
+
+                item.style.display = 'none';
+            
+            },0);
+
+        });
+
+        item.addEventListener('dragend',function(e){
+
+            setTimeout(function(){
+
+                dragged_item.style.display = 'block';
+                dragged_item = null;
+
+            },0);
 
         });
 
