@@ -1,13 +1,13 @@
-var list_items = document.querySelectorAll('.list-item');
-var lists = document.querySelectorAll('.list');
+const list_items = document.querySelectorAll('.list-item');
+const lists = document.querySelectorAll('.list');
 
-var dragged_item = null;
+let dragged_item = null;
 
-for (var i = 0; i < list_items.length; i++) {
+for (let i = 0; i < list_items.length; i++) {
 
-        var item = list_items[i];
+        const item = list_items[i];
 
-        item.addEventListener('dragstart', function(e){
+        item.addEventListener('dragstart', function(){
 
             dragged_item = item;
             
@@ -19,7 +19,7 @@ for (var i = 0; i < list_items.length; i++) {
 
         });
 
-        item.addEventListener('dragend',function(e){
+        item.addEventListener('dragend',function(){
 
             setTimeout(function(){
 
@@ -30,9 +30,36 @@ for (var i = 0; i < list_items.length; i++) {
 
         });
 
-        for(var j = 0; j < lists.length; j++){
+        for(let j = 0; j < lists.length; j++){
 
-            var list = lists[j];
+            const list = lists[j];
+
+            list.addEventListener('dragover',function(e){
+
+                e.preventDefault();
+
+            });
+
+            list.addEventListener('dragenter',function(e){
+
+                e.preventDefault();
+                this.style.backgroundColor = 'rgba(0 ,0 ,0 , 0.2)';
+
+            });
+
+
+            list.addEventListener('dragleave', function(e){
+
+                this.style.backgroundColor = 'rgba(0 ,0 ,0 , 0.1)';
+
+            });
+
+            list.addEventListener('drop', function(){
+
+                this.style.backgroundColor = 'rgba(0 ,0 ,0 , 0.1)';
+                this.append(dragged_item);
+
+            });
 
 
         }
